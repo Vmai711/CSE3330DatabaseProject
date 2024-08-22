@@ -1,0 +1,33 @@
+QV1 Create a view SCHOLARSHIP_DETAILS(PHDSTUDENT.StudentId, PHDSTUDENT.FName, PHDSTUDENT.LName, SCHOLARSHIPSUPPORT.ScholarshipID, SCHOLARSHIP.Type) that gathers information about each PhD student and the type of scholarship they receive. Rename the attributes in the view as: (StuId, StuFName, StuLName, ScholId, ScholType).
+
+CREATE VIEW SCHOLARSHIP_DETAILS
+
+AS SELECT S.StudentId as StuId, S.FName as StuFName, S.LName as StuLName, SS.ScholarshipId as ScholId, SP.Type as ScholType
+
+FROM PHDSTUDENT S, SCHOLARSHIPSUPPORT SS, SCHOLARSHIP SP
+
+WHERE S.StudentId=SS.StudentId and SP.ScholarshipId=SS.ScholarshipId
+
+QA.Retrieve for each student the StuId, StuFName, StuLName, and the type of scholarship
+they have.
+
+SELECT SD.StuId,SD.StuFName, SD.StuLName, SD.ScholType
+
+FROM SCHOLARSHIP_DETAILS SD
+
+QB. Retrieve the scholarship type(s) received by the student 'Alice Jones'.
+
+SELECT  SD.StuFName, SD.StuLName, SD.ScholType
+
+FROM SCHOLARSHIP_DETAILS SD
+
+WHERE SD.StuFName='Alice' and SD.StuLName='Jones'
+
+QC. Retrieve the names of students (StuFName and StuLName) who have a 'Research'
+scholarship. List the scholarship type against the student’s name.
+
+SELECT SD.ScholType, SD.StuFName, SD.StuLName 
+
+FROM SCHOLARSHIP_DETAILS SD
+
+WHERE SD.ScholType=' Research'
